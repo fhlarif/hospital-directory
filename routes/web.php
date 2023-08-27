@@ -16,7 +16,7 @@ use App\Http\Controllers\HospitalController;
 */
 
 Route::get('/', function () {
-    return redirect(route('register'));
+    return view('welcome');
 });
 
 Route::get('/dashboard', function () {

@@ -4,8 +4,11 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
+use App\Models\Institution;
 use Illuminate\Http\Request;
 use Illuminate\Contracts\View\View;
+use App\Http\Resources\HospitalResource;
+use App\Http\Resources\HospitalCollection;
 
 class HospitalController extends Controller
 {
@@ -20,48 +23,24 @@ class HospitalController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function apiIndex(Request $request): HospitalCollection
     {
-        //
-    }
+        $type = $request->type ?? 'name';
+        $search = $request->search ?? '';
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
+        $query = Institution::orderBy('id', 'DESC');
+        if ($search !== '') {
+            $query = Institution::where($type, 'like', '%' . strtolower($search) . '%')->orderBy('id', 'DESC');
+        }
+
+        return new HospitalCollection($query->paginate(5));
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function apiShow(string $id): HospitalResource
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
+        return new HospitalResource(Institution::findOrFail($id));
     }
 }

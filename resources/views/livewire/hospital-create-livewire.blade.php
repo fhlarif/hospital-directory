@@ -17,6 +17,8 @@
     <button wire:click='handleShow'
         class="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2">Create
         New Hospital or Institution</button>
+    <a class="text-white bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 "
+        target="_blank" href="{{ route('api.v1.hospital.index') }}">Show Api List</a>
     @if ($show)
         @include('modules.hospitals.partials.form')
     @endif

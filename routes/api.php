@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\HospitalController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,4 +17,9 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
+});
+
+Route::prefix('/v1/hospital')->name('api.v1.hospital.')->group(function () {
+    Route::get('/index', [HospitalController::class, 'apiIndex'])->name('index');
+    Route::get('/show/{id}', [HospitalController::class, 'apiShow'])->name('show');
 });

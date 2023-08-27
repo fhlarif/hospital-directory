@@ -92,6 +92,10 @@
                         <td class="px-6 py-4">
                             <span class="text-purple-800">{{ $institution->ins_phone ?? 'N/A' }}</span>
                         </td>
+                        <td class="px-6 py-4">
+                            <a class="text-purple-800" href="{{ route('api.v1.hospital.show', [$institution->id]) }}"
+                                target="blank">API</a>
+                        </td>
                     </tr>
                 @endforeach
             </tbody>
