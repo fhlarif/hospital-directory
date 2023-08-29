@@ -47,6 +47,6 @@ class InstitutionForm extends Form
 
     public function save()
     {
-        Institution::create($this->all());
+        Institution::create($this->validate());
     }
 }
