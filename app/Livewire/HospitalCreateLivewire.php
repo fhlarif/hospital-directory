@@ -17,7 +17,8 @@ class HospitalCreateLivewire extends Component
     public function handleCreate()
     {
         $this->form->save();
-        session()->flash('success', 'Institution created!');
+        // session()->flash('success', 'Institution created!');
         $this->reset();
+        redirect(route('hospital.index'))->with('success', 'Institution created!');
     }
 }
